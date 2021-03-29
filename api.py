@@ -2,7 +2,7 @@ import rospy
 import time
 import threading
 import os
-
+from ros_vision.vision import vision
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Int32MultiArray
 
@@ -17,11 +17,12 @@ class Turtlebot:
 
         self.old_vel = Twist()
         self.current_vel = Twist()
-        rospy.sleep(1)  # set some delay for node settling
         
+        self.detector = vision()
         self.motor_thread = threading.Thread(target=self.publisher_thread)
         self.motor_thread.start()
         self.rate = rospy.Rate(200)
+        rospy.sleep(1)  # set some delay for node settling
         
     def publisher_thread(self):
         time.sleep(1)
@@ -38,6 +39,9 @@ class Turtlebot:
             return self.sensor_msg.data[number_sensor]
         else:
             return 0
+
+    def detect(self):
+        return self.detector.image_prediction()
 
     def move_robot(self, left, right):
         data = Twist()
