@@ -1,6 +1,8 @@
 import rospy
 import time
 import threading
+import os
+
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Int32MultiArray
 
@@ -24,12 +26,10 @@ class Turtlebot:
     def publisher_thread(self):
         time.sleep(1)
         while(not rospy.is_shutdown()):
-            for i in threading.enumerate():
-                if(i.name == "MainThread" and not i.is_alive()):
-                    return
             self.vel_pub.publish(self.current_vel)
             self.rate.sleep()
-        
+        os._exit(0)
+
     def sensor_callback(self, msg):
         self.sensor_msg = msg
 
