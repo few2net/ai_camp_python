@@ -18,7 +18,6 @@ class Turtlebot:
         self.old_vel = Twist()
         self.current_vel = Twist()
         
-        self.detector = vision()
         self.motor_thread = threading.Thread(target=self.publisher_thread)
         self.motor_thread.start()
         self.rate = rospy.Rate(200)
@@ -40,8 +39,11 @@ class Turtlebot:
         else:
             return 0
 
+    def start_camera(self):
+        self.detector = vision()
+
     def detect(self):
-        return self.detector.image_prediction()
+        return self.detector.get_prediction()[0]
 
     def move_robot(self, left, right):
         data = Twist()

@@ -5,13 +5,14 @@ import time
 
 print("start")
 robot = Turtlebot()
+robot.start_camera()
 L_TH = 50
 R_TH = 40
 
 
 state = 0
 while(True):
-    robot.detect()
+    print(robot.detect())
     """
     ir_left = robot.get_sensor(0)
     ir_right = robot.get_sensor(1)
