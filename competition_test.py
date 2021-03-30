@@ -12,13 +12,16 @@ R_TH = 40
 
 state = 0
 while(True):
-    print(robot.detect())
-    """
+    
+    label = robot.detect_label()
+    print("class: "+str(label))
     ir_left = robot.get_sensor(0)
     ir_right = robot.get_sensor(1)
     print(ir_left,ir_right)
 
-
+    if(label == 1):
+        robot.stop()
+        time.sleep(2)
     if(ir_left>L_TH and ir_right>R_TH):
         robot.move_robot(30,30)
 
@@ -27,5 +30,5 @@ while(True):
 
     elif(ir_left<L_TH and ir_right>R_TH):
         robot.move_robot(30,20)
-    """
+
 

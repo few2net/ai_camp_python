@@ -42,8 +42,11 @@ class Turtlebot:
     def start_camera(self):
         self.detector = vision()
 
-    def detect(self):
+    def detect_label(self):
         return self.detector.get_prediction()[0]
+
+    def detect_score(self):
+        return self.detector.get_prediction()[1]
 
     def move_robot(self, left, right):
         data = Twist()
