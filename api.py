@@ -2,7 +2,7 @@ import rospy
 import time
 import threading
 import os
-#from ros_vision.vision import vision
+from ros_vision.vision import vision
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Int32MultiArray
 
@@ -45,13 +45,12 @@ class Turtlebot:
 
     def start_camera(self):
         self.detector = vision()
-    """
+    
     def detect_label(self):
         return self.detector.get_prediction()[0]
 
     def detect_score(self):
         return self.detector.get_prediction()[1]
-    """
 
     def move_robot(self, left, right):
         data = Twist()
